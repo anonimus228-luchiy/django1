@@ -14,4 +14,12 @@ def html_view(request):
 
 def post_list(request):
     posts = Post.objects.all()
-    return HttpResponse(f"{'. '.join([post.title for post in posts])}")
+    return render(request, "post_list.html", {"posts": posts})
+
+def post_detail_view(request, post_id):
+    post = Post.objects.get(id=post_id)
+    return render(request, "post.html", context={"post": post})
+
+def post_create_view(request):
+    return render(request, "post_create.html")
+

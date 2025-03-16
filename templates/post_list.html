@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <h1>All Posts</h1>
-    <ul>
+    <div class="row">
         {% for post in posts %}
-            <li>
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.content }}</p>
-                <small>Rating: {{ post.rate }} | Created at: {{ post.created_at }}</small>
-            </li>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'download.png' %}" alt="Image not found" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content|slice:":100" }}...</p>
+                        <small class="text-muted">Rating: {{ post.rate }} | Created at: {{ post.created_at }}</small>
+                    </div>
+                </div>
+            </div>
         {% empty %}
             <p>No posts available.</p>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
