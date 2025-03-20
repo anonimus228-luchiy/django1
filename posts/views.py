@@ -4,6 +4,7 @@ import random
 from posts.models import Post
 from django.contrib.auth.decorators import login_required
 from posts.forms import PostCreateForm2
+from django.contrib.auth.decorators import login_required
 
 def test_view(request):
     return HttpResponse(f"Hello, Wrld! {random.randint(1, 100)}")
@@ -43,20 +44,4 @@ def post_create_view(request):
         # if post:
             return redirect("/posts/")
 
-# @login_required(login_url="login")
-# def post_create_view(request):
-#     if request.method == "GET":
-#         form = PostCreateform2()
-#         return render(request, "posts/post_create.html", context={"form": form})
-#     if request.method == "POST":
-#         form = PostCreateform2(request.POST, request.FILES)
-#         if not form.is_valid():
-#             return render(request, "posts/post_create.html", context={"form": form})
-#         elif form.is_valid():
-#             form.save()
-#             # title = form.cleaned_data.get("title")
-#             # content = form.cleaned_data.get("content")
-#             # image = form.cleaned_data.get("image")
-#             # post = Post.objects.create(title=title, content=content, image=image)
-#             # if post:
-#             return redirect("posts")
+
