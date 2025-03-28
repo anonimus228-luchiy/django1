@@ -1,12 +1,14 @@
 {% extends 'posts/base.html' %}
 {% load static %}
-<body>
-    {% block content %}
-    <form action="" method="get">
-        {{form.as_p}}
-        <button type="submit">Search</button>
-    </form>
-    {% for post in posts %}
+{% block content %}
+<h1 class="mt-5" style="text-align: center">Profile</h1>
+
+<div class="container" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 50px">
+    <img src="/static/download.png" alt="Profile Picture" style="width: 200px; height: 200px; border-radius: 50%; margin-left: 40%">
+    <h2>{{user.username}}</h2>
+    <h3>{{user.email}}</h3>
+    <h3>{{user.profile.age}}</h3>
+        {% for post in posts %}
     <div class="card" style="width: 18rem;">
       {% if post.image %}
         <img src="{{post.image.url}}" class="card-img-top" alt="...">
@@ -17,17 +19,10 @@
           <h5 class="card-title">{{post.title}}</h5>
           <p class="card-text">{{post.content}}</p>
           <h4 class="rate">Rate: {{post.rate}}</h4>
-            <h3 class="card-title">Author: {{post.author.username}}</h3>
           <a href="/posts/{{post.id}}/" class="btn btn-primary">Go to post</a>
         </div>
       </div>
     {% endfor %}
-    <div style="display: flex"; justify-content="center"; margin-top="20px"; margin-bottom="20px">
-        {% for i in max_pages %}
-            <a href="/posts/?page={{ i }}" class="btn btn-primary">
-                {{ i }}
-            </a>
-        {% endfor %}
-    </div>
-    {% endblock %}
-</body>
+</div>
+
+{% endblock %}

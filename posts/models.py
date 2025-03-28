@@ -1,5 +1,7 @@
 from django.db import models
 from django import forms
+from django.contrib.auth.models import auth, User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -15,11 +17,13 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,null=True,related_name='posts')
     content = models.TextField()
     image = models.ImageField(upload_to='post_images/', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
     tags = models.ManyToManyField(Tag, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.title

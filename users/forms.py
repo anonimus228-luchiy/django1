@@ -2,10 +2,13 @@ from django import forms
 
 
 class RegisterForm(forms.Form):
+    image = forms.ImageField()
     email = forms.EmailField()
+    age = forms.IntegerField()
     username = forms.CharField()
     password = forms.CharField()
     password_confirm = forms.CharField()
+
 
     def clean(self):
         cleaned_data = super().clean()
